@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans  xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:aop="http://www.springframework.org/schema/aop"
+        xsi:schemaLocation="
+	       http://www.springframework.org/schema/beans
+	       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		   http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+    <bean id="helloBean" class="com.javaconfig.spring.aop.HelloServiceImpl" lazy-init="false"/>
+    <bean id="aopAspect" class="com.javaconfig.spring.aop.HelloAspect" />
+
+    <aop:config>
+        <aop:pointcut id="pointcut" expression="execution(* com.javaconfig.spring.aop.*.*(..))"/><!--表示匹配 aop 包及子包下的任何方法执行。-->
+        <aop:aspect ref="aopAspect">
+            <aop:before pointcut-ref="pointcut"
+                        method="beforeAdvice"/>
+            <aop:after pointcut-ref="pointcut"
+                       method="afterFinallyAdvice"/><!--可以使用pointcut-ref制定已经定义好的pointcut也可以直接在这里写execution-->
+        </aop:aspect>
+    </aop:config>
+</beans>

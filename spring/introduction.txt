@@ -1,0 +1,49 @@
+chapter2 :
+ Bean的命名方式
+ 实例化Bean:spring流程，constructor/ setter/ init
+    Spring中Bean的初始化。
+    如果设置为非Lazy-init的话，在spring容器加载的时候就会默认的创建一个实例。来检验语法的错误。
+    如果设置scope为prototype的时候，不论lazy-init的值，bean的产生都是在使用的时候创建。
+    然后默认情况下scope是singleton的，所有通过spring生成的对象都是单例的。
+    一般情况下，我们会设置Service和Dao为单例的，action为多例的(prototype)
+
+chapter3 :
+    构造器注入：就是容器实例化Bean时注入那些依赖，通过在在Bean定义中指定构造器参数进行注入依赖，包括实例工厂方法参数注入依赖，但静态工厂方法参数不允许注入依赖；
+    setter注入：通过setter方法进行注入依赖；
+    方法注入：能通过配置方式替换掉Bean方法，也就是通过配置改变Bean方法功能。
+
+chapter6：
+aop
+AOP相关定义必须放在<aop:config>标签下，该标签下可以有<aop:pointcut>、<aop:advisor>、<aop:aspect>标签，配置顺序不可变
+	<aop:pointcut>：用来定义切入点，该切入点可以重用；
+	<aop:advisor>：用来定义只有一个通知和一个切入点的切面；
+	<aop:aspect>：用来定义切面，该切面可以包含多个切入点和通知，而且标签内部的通知和切入点定义是无序的；和advisor的区别就在此，advisor只包含一个通知和一个切入点。
+<aop:config>    AOP定义开始（有序）
+    <aop:pointcut/> 切入点定义（零个或多个）
+    <aop:advisor/>  Advisor定义（零个或多个）
+    <aop:aspect>    切面定义开始（零个或多个，无序）
+        <aop:pointcut/> 切入点定义（零个或多个）
+        <aop:before"/>  前置通知（零个或多个）
+        <aop:after-returning/>  后置返回通知（零个或多个）
+        <aop:after-throwing/>   后置异常通知（零个或多个）
+        <aop:after/>    后置最终通知（零个或多个）
+        <aop:around/>   环绕通知（零个或多个）
+        <aop:declare-parents/>  引入定义（零个或多个）
+   </aop:aspect>    切面定义结束
+</aop:config>AOP定义结束
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

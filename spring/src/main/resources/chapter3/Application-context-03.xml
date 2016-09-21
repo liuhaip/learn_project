@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans  xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:context="http://www.springframework.org/schema/context"
+        xsi:schemaLocation="
+	       http://www.springframework.org/schema/beans
+	       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		   http://www.springframework.org/schema/context
+		   http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+    <!--DI-->
+    <!--方式1：构造器注入-->
+    <bean id="helloApi1" class="com.javaconfig.spring.chapter3.HelloInEnglish" >
+        <constructor-arg name="word" value="xxx"/>
+    </bean>
+
+    <!--方式2：setter注入-->
+    <bean id="helloApi2" class="com.javaconfig.spring.chapter3.HelloInEnglish">
+        <property name="words" value="a"/>
+        <property name="properties">
+            <props>
+                <prop key="1">1</prop>
+                <prop key="2">2</prop>
+            </props>
+        </property>
+    </bean>
+
+
+
+
+
+ </beans>

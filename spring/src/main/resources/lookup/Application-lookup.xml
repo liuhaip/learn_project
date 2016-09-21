@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans  xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="
+	       http://www.springframework.org/schema/beans
+	       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <bean id="singletonPrinter" class="com.javaconfig.spring.lookup.Printer" scope="singleton" />
+    <bean id="prototypePrinter" class="com.javaconfig.spring.lookup.Printer" scope="prototype" />
+
+    <bean id="singletonHelloApi" class="com.javaconfig.spring.lookup.LookUpHello" scope="singleton">
+        <property name="printer" ref="prototypePrinter" />
+        <lookup-method name="createSingletonPrinter" bean="singletonPrinter"/>
+        <lookup-method name="createPrototypePrinter" bean="prototypePrinter"/>
+    </bean>
+
+    <bean id="prototypeHelloApi" class="com.javaconfig.spring.lookup.LookUpHello" scope="prototype">
+        <property name="printer" ref="prototypePrinter" />
+        <lookup-method name="createSingletonPrinter" bean="singletonPrinter"/>
+        <lookup-method name="createPrototypePrinter" bean="prototypePrinter"/>
+    </bean>
+
+    <bean id="replacePrinter" class="com.javaconfig.spring.lookup.PrintReplacer"></bean>
+
+    <bean id="printer" class="com.javaconfig.spring.lookup.Printer" scope="singleton" >
+        <replaced-method name="print" replacer="replacePrinter">
+            <arg-type match=""></arg-type><!--如果方法名存在重载的情况，这里的参数必须制定，要不然就不发进行替换了。如果不存在重载的方法，此处可以忽略，甚至可以乱填。-->
+        </replaced-method>
+    </bean>
+
+    <bean id="replaceHelloApi" class="com.javaconfig.spring.lookup.LookUpHello" scope="singleton">
+        <property name="printer" ref="printer" />
+        <lookup-method name="createSingletonPrinter" bean="singletonPrinter"/>
+        <lookup-method name="createPrototypePrinter" bean="prototypePrinter"/>
+    </bean>
+
+</beans>
